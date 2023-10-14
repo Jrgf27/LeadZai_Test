@@ -23,7 +23,7 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     if not isinstance(around, int) or isinstance(around, bool):
         raise TypeError("around must be a positive integer or zero")
 
-    #Check if input parameter are the correct values
+    #Check if input parameter are within appropriate values
     if total_pages <= 0:
         raise ValueError("total_pages must be a positive integer")
     if current_page <= 0 or current_page > total_pages:
@@ -35,6 +35,7 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
 
     #If the boundaries value is atleast half of the total pages value,
     # the start and end page number lists will crossover and generate one single list.
+    # Thus a list with all possible page numbers is immediately returned
     if boundaries > total_pages//2:
         result = ' '.join(map(str, range(1, total_pages + 1)))
         print (result)

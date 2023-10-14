@@ -76,8 +76,24 @@ class TestPaginationGenerator(TestCase):
         self.assertRaises(ValueError, pg, 2, 2, test_negative, 2)
         self.assertRaises(ValueError, pg, 2, 2, 2, test_negative)
 
+    def test_boundaries_higher_than_total_pages(self):
+        """Test that ValueError is raised when boundaries are higher than total pages"""
+        self.assertRaises(ValueError, pg, 2, 2, 3, 2)
+
+    def test_current_page_higher_than_total_pages(self):
+        """Test that ValueError is raised when current page is higher than total pages"""
+        self.assertRaises(ValueError, pg, 3, 2, 2, 2)
+
+    def test_around_higher_than_total_pages(self):
+        """Test that ValueError is raised when around is higher than total pages"""
+        self.assertRaises(ValueError, pg, 2, 2, 2, 3)
+
     def test_integer_values(self):
         """Test that the output is the correct string given the input values"""
         self.assertEqual(pg(4,5,1,0), '1 ... 4 5')
+        self.assertEqual(pg(4,5,5,0), '1 2 3 4 5')
+        self.assertEqual(pg(4,5,1,5), '1 2 3 4 5')
+        self.assertEqual(pg(4,5,5,5), '1 2 3 4 5')
         self.assertEqual(pg(4,10,2,2), '1 2 3 4 5 6 ... 9 10')
         self.assertEqual(pg(5,10,2,1), '1 2 ... 4 5 6 ... 9 10')
+        self.assertEqual(pg(500,1000,2,1), '1 2 ... 499 500 501 ... 999 1000')

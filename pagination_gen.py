@@ -60,9 +60,9 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     #Generation of list of pages around the final page
     end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
 
-    start_pagination = pagination_list_extendor(start_pagination, current_pagination)
-    start_pagination = pagination_list_extendor(start_pagination, end_pagination)
-    result = ' '.join(map(str, start_pagination))
+    result_list = pagination_list_extendor(start_pagination, current_pagination)
+    result_list = pagination_list_extendor(result_list, end_pagination)
+    result = ' '.join(map(str, result_list))
 
     print(result)
     return result

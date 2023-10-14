@@ -56,17 +56,17 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     current_pagination = [i for i in range(current_page - around, current_page + around + 1) \
                             if 0 < i <=total_pages] or [current_page]
 
-    #Generation of list of pages around the final page
-    end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
-
     #Extending the start page list with the current page list
     result_list = pagination_list_extendor(start_pagination, current_pagination)
 
-    #Checking if list already has all page numbers and should be returned
+    #Checking if list already has all page numbers possible and should be returned
     if result_list[-1]==total_pages:
         result = ' '.join(map(str, result_list))
         print(result)
         return result
+
+    #Generation of list of pages around the final page
+    end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
 
     #Extending current result list with end page list,
     # converting to str and returning formatted string
@@ -87,7 +87,6 @@ def pagination_list_extendor(start_list:list, target_list:list) -> list:
     if set(target_list).issubset(set(start_list)):
         return start_list
 
-    #Save the value located at last index of first list
     start_last_value=start_list[-1]
 
     #If last value of first list is in target list,

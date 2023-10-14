@@ -36,8 +36,7 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     #If the boundaries value is atleast half of the total pages value,
     # the start and end page number lists will crossover and generate one single list.
     if boundaries > total_pages//2:
-        result_list = list(range(1, 1 + total_pages))
-        result = ' '.join(map(str, result_list))
+        result = ' '.join(map(str, range(1, total_pages + 1)))
         print (result)
         return result
 
@@ -63,7 +62,6 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     result_list = pagination_list_extendor(start_pagination, current_pagination)
     result_list = pagination_list_extendor(result_list, end_pagination)
     result = ' '.join(map(str, result_list))
-
     print(result)
     return result
 
@@ -80,12 +78,18 @@ def pagination_list_extendor(start_list:list, target_list:list) -> list:
     if set(target_list).issubset(set(start_list)):
         return start_list
 
+    #Save the value located at last index of first list
     start_last_value=start_list[-1]
+
+    #If last value of first list is in target list,
+    #obtain index of value and extend first list with second list, starting at index
     if start_last_value in target_list:
         index = target_list.index(start_last_value) + 1
         start_list.extend(target_list[index::])
+    #If the start of the second list is the first list final value + 1, simply extend
     elif (start_last_value + 1) == target_list[0]:
         start_list.extend(target_list)
+    #If neither conditions are true, append a '...' element and extend
     else:
         start_list.append('...')
         start_list.extend(target_list)

@@ -88,13 +88,17 @@ class TestPaginationGenerator(TestCase):
         """Test that ValueError is raised when around is higher than total pages"""
         self.assertRaises(ValueError, pg, 2, 2, 2, 3)
 
-    def test_integer_values(self):
+    def test_full_list(self):
         """Test that the output is the correct string given the input values"""
-        self.assertEqual(pg(4,5,1,0), '1 ... 4 5')
         self.assertEqual(pg(4,5,5,0), '1 2 3 4 5')
         self.assertEqual(pg(4,5,1,5), '1 2 3 4 5')
         self.assertEqual(pg(4,5,5,5), '1 2 3 4 5')
         self.assertEqual(pg(2,5,3,0), '1 2 3 4 5')
+        self.assertEqual(pg(4,5,1,2), '1 2 3 4 5')
+
+    def test_list_with_dots(self):
+        """"Tests which output lists with '...' inside"""
+        self.assertEqual(pg(4,5,1,0), '1 ... 4 5')
         self.assertEqual(pg(2,5,2,0), '1 2 ... 4 5')
         self.assertEqual(pg(4,10,2,2), '1 2 3 4 5 6 ... 9 10')
         self.assertEqual(pg(5,10,2,1), '1 2 ... 4 5 6 ... 9 10')

@@ -94,6 +94,8 @@ class TestPaginationGenerator(TestCase):
         self.assertEqual(pg(4,5,5,0), '1 2 3 4 5')
         self.assertEqual(pg(4,5,1,5), '1 2 3 4 5')
         self.assertEqual(pg(4,5,5,5), '1 2 3 4 5')
+        self.assertEqual(pg(2,5,3,0), '1 2 3 4 5')
+        self.assertEqual(pg(2,5,2,0), '1 2 ... 4 5')
         self.assertEqual(pg(4,10,2,2), '1 2 3 4 5 6 ... 9 10')
         self.assertEqual(pg(5,10,2,1), '1 2 ... 4 5 6 ... 9 10')
         self.assertEqual(pg(500,1000,2,1), '1 2 ... 499 500 501 ... 999 1000')

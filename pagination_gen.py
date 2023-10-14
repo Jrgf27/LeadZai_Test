@@ -24,26 +24,44 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
         raise TypeError("around must be a positive integer or zero")
 
     #Check if input parameter are the correct values
-    if current_page <= 0 or current_page > total_pages:
-        raise ValueError("current_page must be a positive integer, lower than total_pages")
     if total_pages <= 0:
         raise ValueError("total_pages must be a positive integer")
+    if current_page <= 0 or current_page > total_pages:
+        raise ValueError("current_page must be a positive integer, lower than total_pages")
     if boundaries <= 0 or boundaries > total_pages:
         raise ValueError("boundaries must be a positive integer, lower than total_pages")
     if around < 0 or around > total_pages:
         raise ValueError("around must be a positive integer or zero, lower than total_pages")
 
+    #If the boundaries value is atleast half of the total pages value,
+    # the start and end page number lists will crossover and generate one single list.
+    if boundaries > total_pages//2:
+        result_list = list(range(1, 1 + total_pages))
+        result = ' '.join(map(str, result_list))
+        print (result)
+        return result
+
+    #Generation of list of pages around the start page
     start_pagination=list(range(1, 1 + boundaries))
-    end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
+
+    #Generation of list of pages around the current page
     if around == 0:
         current_pagination=[current_page]
     else:
         current_pagination = [i for i in range(current_page - around, current_page + around + 1) \
                               if 0 < i <=total_pages]
 
+    #Checking if current_pagination list has all elements possible, if true return the list as str
+    if current_pagination[0]==1 and current_pagination[-1] == total_pages:
+        result = ' '.join(map(str, current_pagination))
+        print(result)
+        return result
+
+    #Generation of list of pages around the final page
+    end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
+
     start_pagination = pagination_list_extendor(start_pagination, current_pagination)
     start_pagination = pagination_list_extendor(start_pagination, end_pagination)
-
     result = ' '.join(map(str, start_pagination))
 
     print(result)
@@ -58,6 +76,7 @@ def pagination_list_extendor(start_list:list, target_list:list) -> list:
     with a '...' element separating the two lists.
     """
 
+    #Checking if target_list is already inside start_list, if it is return start list
     if set(target_list).issubset(set(start_list)):
         return start_list
 
@@ -69,5 +88,5 @@ def pagination_list_extendor(start_list:list, target_list:list) -> list:
         start_list.extend(target_list)
     else:
         start_list.append('...')
-        start_list.extend(target_list[::])
+        start_list.extend(target_list)
     return start_list

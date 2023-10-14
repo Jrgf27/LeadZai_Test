@@ -40,6 +40,13 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
         print (result)
         return result
 
+    #If the current page value and the around values are high enough to cover all page values
+    #return the list with all page numbers
+    if (current_page-around)<=1 and (current_page+around)>=total_pages:
+        result = ' '.join(map(str, range(1, total_pages + 1)))
+        print (result)
+        return result
+
     #Generation of list of pages around the start page
     start_pagination=list(range(1, 1 + boundaries))
 
@@ -48,27 +55,24 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     current_pagination = [i for i in range(current_page - around, current_page + around + 1) \
                             if 0 < i <=total_pages] or [current_page]
 
-    #Checking if current_pagination list has all elements possible, if true return the list as str
-    if current_pagination[0]==1 and current_pagination[-1] == total_pages:
-        result = ' '.join(map(str, current_pagination))
-        print(result)
-        return result
-
     #Generation of list of pages around the final page
     end_pagination=list(range(total_pages, total_pages - boundaries, -1))[::-1]
 
+    #Extending the start page list with the current page list
     result_list = pagination_list_extendor(start_pagination, current_pagination)
+
     #Checking if list already has all page numbers and should be returned
     if result_list[-1]==total_pages:
         result = ' '.join(map(str, result_list))
         print(result)
         return result
 
+    #Extending current result list with end page list,
+    # converting to str and returning formatted string
     result_list = pagination_list_extendor(result_list, end_pagination)
     result = ' '.join(map(str, result_list))
     print(result)
     return result
-
 
 def pagination_list_extendor(start_list:list, target_list:list) -> list:
     """

@@ -76,3 +76,9 @@ class TestPaginationGenerator(TestCase):
         self.assertRaises(ValueError, pg, 2, test_negative, 2, 2)
         self.assertRaises(ValueError, pg, 2, 2, test_negative, 2)
         self.assertRaises(ValueError, pg, 2, 2, 2, test_negative)
+
+    def test_integer_values(self):
+        """Test that the output is the correct string given the input values"""
+        self.assertEqual(pg(4,5,1,0), '1 ... 4 5')
+        self.assertEqual(pg(4,10,2,2), '1 2 3 4 5 6 ... 9 10')
+        self.assertEqual(pg(5,10,2,1), '1 2 ... 4 5 6 ... 9 10')

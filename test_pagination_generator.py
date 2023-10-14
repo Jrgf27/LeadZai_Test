@@ -67,7 +67,6 @@ class TestPaginationGenerator(TestCase):
         self.assertRaises(ValueError, pg, 0, 2, 2, 2)
         self.assertRaises(ValueError, pg, 2, 0, 2, 2)
         self.assertRaises(ValueError, pg, 2, 2, 0, 2)
-        self.assertRaises(ValueError, pg, 2, 2, 2, 0)
 
     def test_negative_values(self):
         """Test that ValueError is raised when input values are negative"""

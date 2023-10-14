@@ -14,13 +14,13 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     """
 
     #Checking if input parameters are the correct type
-    if type(current_page) not in [int]:
+    if not isinstance(current_page, int):
         raise TypeError("current_page must be a positive integer")
-    if type(total_pages) not in [int]:
+    if not isinstance(total_pages, int):
         raise TypeError("total_pages must be a positive integer")
-    if type(boundaries) not in [int]:
+    if not isinstance(boundaries, int):
         raise TypeError("boundaries must be a positive integer")
-    if type(around) not in [int]:
+    if not isinstance(around, int):
         raise TypeError("around must be a positive integer or zero")
 
     #Check if input parameter are the correct values

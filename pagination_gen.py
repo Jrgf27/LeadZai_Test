@@ -61,11 +61,11 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     end_pagination = list(range(total_pages - boundaries + 1, total_pages + 1))
 
     if check_list_inside_list(parent_list = end_pagination, child_list = current_pagination):
-        result_list = pagination_list_extendor(start_pagination, end_pagination)
+        result_list = pagination_list_extender(start_pagination, end_pagination)
         return convert_list_to_string(result_list)
 
-    result_list = pagination_list_extendor(start_pagination, current_pagination)
-    result_list = pagination_list_extendor(result_list, end_pagination)
+    result_list = pagination_list_extender(start_pagination, current_pagination)
+    result_list = pagination_list_extender(result_list, end_pagination)
     return convert_list_to_string(result_list)
 
 def check_for_value_error(variable_name: str, variable_value: int, can_be_zero: bool) -> None:
@@ -100,7 +100,7 @@ def check_list_inside_list(parent_list:list, child_list:list) -> bool:
     """
     return set(child_list).issubset(set(parent_list))
 
-def pagination_list_extendor(start_list:list, target_list:list) -> list:
+def pagination_list_extender(start_list:list, target_list:list) -> list:
     """
     Method to check for crossover between two input lists.
     If crossover exists, returned list will be the extension of start_list with target_list.

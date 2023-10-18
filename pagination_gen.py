@@ -75,14 +75,14 @@ def check_for_value_error(variable_name: str, variable_value: int, can_be_zero: 
         if variable_value <= 0:
             raise ValueError(variable_name + "must be a positive integer")
 
-def check_if_int(variable_name:str, variable_value:int) -> None:
+def check_if_int(variable_name: str, variable_value: int) -> None:
     """Checking for type error for each input variable"""
     if isinstance(variable_value, bool):
         raise TypeError(variable_name + "must be a positive integer")
     if not isinstance(variable_value, int):
         raise TypeError(variable_name + "must be a positive integer")
 
-def convert_list_to_string(list_to_convert:list) -> str:
+def convert_list_to_string(list_to_convert: list) -> str:
     """
     Converts input list into a string with each list element separated
     by a space.
@@ -92,13 +92,13 @@ def convert_list_to_string(list_to_convert:list) -> str:
     print(converted_list_to_string)
     return converted_list_to_string
 
-def check_list_inside_list(parent_list:list, child_list:list) -> bool:
+def check_list_inside_list(parent_list: list, child_list: list) -> bool:
     """
     Checking if child_list values are present in parent_list
     """
     return set(child_list).issubset(set(parent_list))
 
-def pagination_list_extender(current_pagination:list, target_list:list) -> list:
+def pagination_list_extender(current_pagination: list, target_list: list) -> list:
     """
     Method to check for crossover between two input lists.
     If crossover exists, returned list will be the extension of current_pagination with target_list.

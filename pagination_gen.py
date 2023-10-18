@@ -109,11 +109,11 @@ def pagination_list_extender(current_pagination:list, target_list:list) -> list:
     if check_list_inside_list(parent_list = current_pagination, child_list = target_list):
         return current_pagination
 
-    last_value = current_pagination[-1]
-    if last_value in target_list:
-        index = target_list.index(last_value) + 1
+    last_value_current_pagination = current_pagination[-1]
+    if last_value_current_pagination in target_list:
+        index = target_list.index(last_value_current_pagination) + 1
         current_pagination.extend(target_list[index::])
-    elif (last_value + 1) == target_list[0]:
+    elif (last_value_current_pagination + 1) == target_list[0]:
         current_pagination.extend(target_list)
     else:
         current_pagination.append('...')

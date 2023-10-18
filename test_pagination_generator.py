@@ -38,7 +38,7 @@ class TestPaginationGenerator(TestCase):
         self.assertRaises(TypeError, pg, 2, 2, None, 2)
         self.assertRaises(TypeError, pg, 2, 2, 2, None)
 
-    def test_zero_values(self):
+    def test_invalid_zero_values(self):
         """Test that ValueError is raised when input values are zero"""
         self.assertRaises(ValueError, pg, 0, 2, 2, 2)
         self.assertRaises(ValueError, pg, 2, 0, 2, 2)

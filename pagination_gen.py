@@ -98,7 +98,7 @@ def check_list_inside_list(parent_list: list, child_list: list) -> bool:
     """
     return set(child_list).issubset(set(parent_list))
 
-def pagination_list_extender(current_pagination: list, target_list: list) -> list:
+def pagination_list_extender(current_list: list, target_list: list) -> list:
     """
     Method to check for crossover between two input lists.
     If crossover exists, returned list will be the extension of current_pagination with target_list.
@@ -106,16 +106,16 @@ def pagination_list_extender(current_pagination: list, target_list: list) -> lis
     extension of current_pagination with target_list, with a '...' element separating the two lists.
     """
 
-    if check_list_inside_list(parent_list = current_pagination, child_list = target_list):
-        return current_pagination
+    if check_list_inside_list(parent_list = current_list, child_list = target_list):
+        return current_list
 
-    last_value_current_pagination = current_pagination[-1]
+    last_value_current_pagination = current_list[-1]
     if last_value_current_pagination in target_list:
         index = target_list.index(last_value_current_pagination) + 1
-        current_pagination.extend(target_list[index::])
+        current_list.extend(target_list[index::])
     elif (last_value_current_pagination + 1) == target_list[0]:
-        current_pagination.extend(target_list)
+        current_list.extend(target_list)
     else:
-        current_pagination.append('...')
-        current_pagination.extend(target_list)
-    return current_pagination
+        current_list.append('...')
+        current_list.extend(target_list)
+    return current_list

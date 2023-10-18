@@ -14,7 +14,6 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     """
 
     #Input variable checks start#
-
     check_if_int('current_page', current_page)
     check_if_int('total_pages', total_pages)
     check_if_int('boundaries', boundaries)
@@ -27,7 +26,6 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
 
     if current_page > total_pages:
         raise ValueError("current_page must be lower than total_pages")
-
     #Input variable checks end#
 
     if boundaries > total_pages // 2:
@@ -100,24 +98,24 @@ def check_list_inside_list(parent_list:list, child_list:list) -> bool:
     """
     return set(child_list).issubset(set(parent_list))
 
-def pagination_list_extender(start_list:list, target_list:list) -> list:
+def pagination_list_extender(current_pagination:list, target_list:list) -> list:
     """
     Method to check for crossover between two input lists.
-    If crossover exists, returned list will be the extension of start_list with target_list.
-    If no crossover occurs, returned list will be the extension of start_list with target_list, 
-    with a '...' element separating the two lists.
+    If crossover exists, returned list will be the extension of current_pagination with target_list.
+    If no crossover occurs, returned list will be the
+    extension of current_pagination with target_list, with a '...' element separating the two lists.
     """
 
-    if check_list_inside_list(parent_list = start_list, child_list = target_list):
-        return start_list
+    if check_list_inside_list(parent_list = current_pagination, child_list = target_list):
+        return current_pagination
 
-    start_last_value = start_list[-1]
-    if start_last_value in target_list:
-        index = target_list.index(start_last_value) + 1
-        start_list.extend(target_list[index::])
-    elif (start_last_value + 1) == target_list[0]:
-        start_list.extend(target_list)
+    last_value = current_pagination[-1]
+    if last_value in target_list:
+        index = target_list.index(last_value) + 1
+        current_pagination.extend(target_list[index::])
+    elif (last_value + 1) == target_list[0]:
+        current_pagination.extend(target_list)
     else:
-        start_list.append('...')
-        start_list.extend(target_list)
-    return start_list
+        current_pagination.append('...')
+        current_pagination.extend(target_list)
+    return current_pagination

@@ -8,7 +8,7 @@ def pagination_generator(current_page: int, total_pages: int, boundaries: int, a
     current_page: In which page the user is located, needs to be positive integer.
     total_pages: How many pages exist, needs to be positive integer.
     boundaries: How many pages are shown before and after the first and last pages (inclusive),
-    needs to be positive integer.
+    needs to be positive integer or zero.
     around: How many pages are visible around the current page (exclusive), 
     needs to be either positive integer or zero.
     """

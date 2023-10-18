@@ -91,15 +91,16 @@ class TestPaginationGenerator(TestCase):
         """"Tests which output lists with '...' inside and current page at end of list"""
         self.assertEqual(pg(4,5,1,0), '1 ... 4 5')
         self.assertEqual(pg(4,10,2,2), '1 2 3 4 5 6 ... 9 10')
-
         self.assertEqual(pg(10,10,3,1), '1 2 3 ... 8 9 10')
         self.assertEqual(pg(9,10,4,1), '1 2 3 4 ... 7 8 9 10')
+        self.assertEqual(pg(10,10,4,4), '1 2 3 4 ... 6 7 8 9 10')
 
     def test_valid_list_with_dots_current_page_at_start(self):
         """"Tests which output lists with '...' inside and current page at start of list"""
         self.assertEqual(pg(2,5,2,0), '1 2 ... 4 5')
         self.assertEqual(pg(2,10,3,1), '1 2 3 ... 8 9 10')
         self.assertEqual(pg(1,10,4,1), '1 2 3 4 ... 7 8 9 10')
+        self.assertEqual(pg(1,10,4,4), '1 2 3 4 5 ... 7 8 9 10')
 
     def test_valid_list_with_dots_current_page_at_middle(self):
         """"Tests which output lists with '...' inside and current page at middle of list"""
